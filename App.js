@@ -1,20 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View,SafeAreaView } from 'react-native';
+import FoodItem from "./components/FoodItem"
+import menu from './data/Menu.json';
+import { useState,useEffect, useContext } from 'react';
+import OrderProvider from './context/orderContext';
+import Orders from "./screens/Orders"
+import Navigation from './Navigation';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <OrderProvider>
+        <Navigation/>
+    </OrderProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop:30
   },
 });

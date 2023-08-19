@@ -1,0 +1,68 @@
+{
+  "data": [
+    {
+      "index": 0,
+      "imgurl": "../assets/FoodImages/pasta.jpg",
+      "title": "Pasta",
+      "descr": "Description of Image 1",
+      "count": 3,
+      "state": 1
+    },
+    {
+      "index": 1,
+      "imgurl": "../assets/FoodImages/burger.jpg",
+      "title": "Burger",
+      "descr": "Description of Image 2",
+      "count": 0,
+      "state": 0
+    },
+    {
+      "index": 2,
+      "imgurl": "../assets/FoodImages/momos.jpg",
+      "title": "Momos",
+      "descr": "Description of Image 3",
+      "count": 5,
+      "state": 3
+    },
+    {
+      "index": 3,
+      "imgurl": "../assets/FoodImages/noodles.jpg",
+      "title": "Noodles",
+      "descr": "Description of Image 4",
+      "count": 2,
+      "state": 2
+    },
+    {
+      "index": 4,
+      "imgurl": "../assets/FoodImages/poori.jpg",
+      "title": "Poori",
+      "descr": "Description of Image 5",
+      "count": 1,
+      "state": 4
+    },
+    {
+      "index": 5,
+      "imgurl": "../assets/FoodImages/poori.jpg",
+      "title": "Poori",
+      "descr": "Description of Image 5",
+      "count": 1,
+      "state": 4
+    },
+    {
+      "index": 6,
+      "imgurl": "../assets/FoodImages/poori.jpg",
+      "title": "Poori",
+      "descr": "Description of Image 5",
+      "count": 1,
+      "state": 4
+    },
+    {
+      "index": 7,
+      "imgurl": "../assets/FoodImages/poori.jpg",
+      "title": "Poori",
+      "descr": "Description of Image 5",
+      "count": 1,
+      "state": 5
+    }
+  ]
+}
