@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,TouchableOpacity,Image } from 'react-native';
 import ProgressBar from "../components/ProgressBar"
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-import { Image } from '@rneui/themed';
 import {CustomAlert2Btn} from "../components/ConfirmDeleteModal"
 import IsVeg from './FoodTypeComp';
 
 const FoodItem = ({title,url,descr,price,rating,isVeg,onPress}) => {
   let imgurl=JSON.stringify(url);
+  console.log(url)
   const [showDelete,setShowDelete]=useState(false)
   const [showReceivedModal,setShowReceivedModal]=useState(false)
 
@@ -20,13 +20,17 @@ const FoodItem = ({title,url,descr,price,rating,isVeg,onPress}) => {
     setShowReceivedModal(!showReceivedModal)
   }
   // console.log(imgurl)
+  const pressOnFood=()=>
+  {
+    console.log("click on the btn")
+  }
   return (
-    <View onPress={onPress} style={{borderRadius:15,borderWidth:2,borderColor:"black",backgroundColor:"lightgreen",width:"98%",marginBottom:15}}>
+    <TouchableOpacity onPress={onPress} style={{borderRadius:15,borderWidth:2,borderColor:"black",backgroundColor:"lightgrey",width:"98%",marginBottom:15}}>
      {/* top view */}
      <View style={{flexDirection:"row"}} onPress={onPress}>
       {/* view for the image */}
      <View style={{width:"30%",justifyContent:"center",padding:15}}>
-      <Image source={require("../assets/FoodImages/burger.jpg")} style={{width:80,height:80}}/>
+      <Image source={{uri:url}} style={{width:100,height:130,resizeMode:"stretch"}}/>
 
       </View>
       {/* view for the text */}
@@ -43,9 +47,9 @@ const FoodItem = ({title,url,descr,price,rating,isVeg,onPress}) => {
         </View> */}
        </View>
        {/* description view */}
-      <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center",backgroundColor:"blue"}}>
-          <View style={{backgroundColor:"red"}}>
-           <Text style={{color:"grey",paddingHorizontal:15}}>{descr || "description"}</Text>
+      <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
+          <View>
+           <Text style={{color:"black",paddingHorizontal:10,fontSize:12}}>{descr || "description"}</Text>
           </View>
           
           {/* <View>
@@ -69,7 +73,7 @@ const FoodItem = ({title,url,descr,price,rating,isVeg,onPress}) => {
         {/* <ProgressBar currentStatus={status}/> */}
       </View>
       
-    </View>
+    </TouchableOpacity>
   )
 }
 

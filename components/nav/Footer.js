@@ -45,14 +45,14 @@ const Footer = () => {
         }}>
         <FooterTab
           name="home"
-          title="Home"
-          submit={() => navigation.navigate('Home')}
+          title="Orders"
+          submit={() => navigation.navigate('Orders')}
           routeName={route.name}
         />
          <FooterTab
-          name="grid-outlined"
-          title="Post"
-          submit={() => navigation.navigate('Home')}
+          name="book"
+          title="OrderDetails"
+          submit={() => navigation.navigate('OrderDetails')}
           routeName={route.name}
         />
          <FooterTab

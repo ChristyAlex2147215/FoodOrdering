@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useContext } from 'react';
 import { View, Text, TextInput, FlatList,StyleSheet,TouchableOpacity } from 'react-native';
+import {OrderContext} from "../context/orderContext"
 
 const SearchRecommendation = ({ data }) => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [showsuggetions,setShowSuggetions]=useState(false);
+  const { order, setOrder}=useContext(OrderContext)
 //   console.log(data)
 
   const handleInputChange = (text) => {
@@ -18,8 +21,6 @@ const SearchRecommendation = ({ data }) => {
     {
         setSuggestions([])
         setShowSuggetions(false)
-
-
     }
     setSuggestions(filteredSuggestions);
     setShowSuggetions(true)
@@ -31,6 +32,12 @@ const SearchRecommendation = ({ data }) => {
     setQuery(option);
     setShowSuggetions(false)
 
+  }
+
+  const searchRes=order.filter((item)=>item.title===query)
+  if(searchRes!==undefined && searchRes!==null && searchRes!=="")
+  {
+    setOrder(searchRes);
   }
 
   return (

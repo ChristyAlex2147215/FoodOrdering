@@ -7,80 +7,80 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
-// import TypeSelectionButton from '../components/dashboar/TypeSelectionButton';
-// import ProductComponent from '../components/dashboar/ProductComponent';
-import Footer from '../components/nav/Footer';
-// import MatchTitlleButton from '../components/dashboar/MatchTitlleButton';
-// import CarouselCards from '../components/productDetail/CarouselCards';
-import StarRating from 'react-native-star-rating';
-import {useContext} from "react";
 
-const ProductDetail = ({route}) => {
-  const [starCount, setStarCount] = useState(0);
-  const {obj}=route.params;
-  const onStarRatingPress = star => {
-    setStarCount(star);
-  };
+import Footer from '../components/nav/Footer';
+import {useContext} from "react";
+import Ratings from '../components/StarRating';
+import { List } from 'react-native-paper';
+import { OrderContext } from '../context/orderContext';
+import Suggestions from '../components/Suggestions';
+
+const OrderDetails = ({navigation,route}) => {
+
+    console.log(route.params.obj.imgurl)
+    const { order, setOrder}=useContext(OrderContext);
+
+    const listOfIngredients=route?.params?.obj?.ingredients.map(
+        (item,index)=> 
+        <View style={{justifyContent:'flex-start',flexDirection:"row",padding:5}}>
+            <Text>{index+1}.</Text>
+            <Text style={{paddingHorizontal:5}}>{item}</Text>
+        </View>)
+    
+    const ingredientslist=route?.params?.obj?.ingredients.map((item)=>item);
+    // Function to find items with matching ingredients
+
+function findItemsWithMatchingIngredients(searchIngredients){
+  const matchingItems = [];
+
+  order.forEach((item) => {
+    // Compare ingredients
+    const matching = searchIngredients.some((ingredient) =>
+      item.ingredients.includes(ingredient)
+    );
+
+    if (matching) {
+      matchingItems.push(item);
+    }
+  });
+
+  return matchingItems;
+};
+
+//   console.log(ingredientslist)
+  const suggestedItems=findItemsWithMatchingIngredients(ingredientslist);
+//   console.log("Suggested data obtained =>",suggestedItems);
+  const suggestedData=suggestedItems.map((item,index)=><Suggestions item={item}/>)
+
+  
+  
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView
-        contentContainerStyle={{flexGrow: 1, backgroundColor: '#FCFCFD'}}>
-        <View style={styles.container}>
-          {/* <CarouselCards /> */}
-        </View>
-        <View style={styles.productDetails}>
-          <Text style={{fontSize: 16}}>{"Title"}</Text>
-          <Text style={{fontSize: 12, color: '#000', paddingTop: 8}}>
-           {"Description"}
-          </Text>
-        </View>
-    
-       
-        <View style={{marginHorizontal: 16}}>
-          <Text style={{fontSize: 24, color: '#000'}}>reviews </Text>
-          <ScrollView
-            contentContainerStyle={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              flexGrow: 1,
-              marginTop: 16,
-            }}
-            horizontal={true}>
-            <Image
-              source={require('../assets/FoodImages/burger.jpg')}
-              style={{width: 151, height: 256}}
-            />
-            <Image
-              source={require('../assets/FoodImages/burger.jpg')}
-              style={{width: 151, height: 256, marginLeft: 16}}
-            />
-            <Image
-              source={require('../assets/FoodImages/burger.jpg')}
-              style={{width: 151, height: 256, marginLeft: 16}}
-            />
-            <Image
-              source={require('../assets/FoodImages/burger.jpg')}
-              style={{width: 151, height: 256, marginLeft: 16}}
-            />
-          </ScrollView>
-        </View>
-        <View style={styles.ratingBox}>
-          <StarRating
-            disabled={false}
-            maxStars={5}
-            rating={starCount}
-            selectedStar={rating => onStarRatingPress(rating)}
-            containerStyle={{width: '80%'}}
-            halfStarColor={'grey'}
-            halfStarEnabled={true}
-          />
-        </View>
-        <View style={{marginHorizontal:16}}>
-            <Text style={{fontSize:24,color:"#000"}}>You may also like</Text>
-            <ScrollView horizontal={true}>
-              
+        contentContainerStyle={{flexGrow: 1, backgroundColor: '#FCFCFD',marginHorizontal:16}}>
+           <View >
+           <Text style={{fontSize:30,textAlign:"center",marginVertical:10}}>{route?.params?.obj?.title || "Title"}</Text>
+           <View style={{justifyContent:"center",alignContent:"center",alignItems:"center",backgroundColor:"lightgrey"}}>
+                <Image source={{uri:route?.params?.obj?.imgurl}} style={{height:250,width:300,resizeMode:"stretch"}} />
+           </View>
+           <View style={{marginVertical:16}}>
+           <Text style={{fontSize:18}}>Description:</Text>
+           <Text style={{fontSize:14,paddingVertical:8}}>{route?.params?.obj?.descr}</Text>
+           </View>
+           <View style={{marginVertical:16}}>
+           <Text style={{fontSize:18}}>Ingredients:</Text>
+           {listOfIngredients}
+           </View>
+            {/* <Text>{route.params.obj.rating}</Text> */}
+            <Ratings rating={route?.params?.obj?.rating} size={60} showText={true}/>
+            <View style={{marginVertical:16}}>
+                <Text style={{fontSize:24}}>Suggested Items:</Text>
+                <ScrollView contentContainerStyle={{marginVertical:20}} horizontal>
+                {suggestedData}
             </ScrollView>
-        </View>
+            </View>
+           </View>
+        
       </ScrollView>
       <Footer />
     </SafeAreaView>
@@ -122,4 +122,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductDetail;
+export default OrderDetails;
