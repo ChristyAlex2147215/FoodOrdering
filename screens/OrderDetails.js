@@ -22,7 +22,7 @@ const OrderDetails = ({navigation,route}) => {
 
     const listOfIngredients=route?.params?.obj?.ingredients.map(
         (item,index)=> 
-        <View style={{justifyContent:'flex-start',flexDirection:"row",padding:5}}>
+        <View style={{justifyContent:'flex-start',flexDirection:"row",padding:5}} key={index}>
             <Text>{index+1}.</Text>
             <Text style={{paddingHorizontal:5}}>{item}</Text>
         </View>)
@@ -50,7 +50,7 @@ function findItemsWithMatchingIngredients(searchIngredients){
 //   console.log(ingredientslist)
   const suggestedItems=findItemsWithMatchingIngredients(ingredientslist);
 //   console.log("Suggested data obtained =>",suggestedItems);
-  const suggestedData=suggestedItems.map((item,index)=><Suggestions item={item}/>)
+  const suggestedData=suggestedItems.map((item,index)=><Suggestions item={item} key={item.title}/>)
 
   
   

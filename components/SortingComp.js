@@ -6,10 +6,8 @@ import { Picker } from '@react-native-picker/picker';
 
 const Dropdown = () => {
     const items = [
-        { label: 'price asc', value: 'price asc' },
-        { label: 'price dsc', value: 'price dsc' },
-        { label: 'rating asc', value: 'rating asc' },
-        { label: 'rating dsc', value: 'rating dsc' },
+        { label: 'price', value: 'price' },
+        { label: 'rating', value: 'rating' },
         { label: 'veg', value: 'veg' },
         { label: 'Non Veg', value: 'Non Veg' },
     ];
@@ -61,7 +59,7 @@ const Dropdown = () => {
                 onValueChange={(itemValue, itemIndex) => { sort(itemValue); }}
             >
                 {items.map((item, index) => (
-                    <Picker.Item key={index} label={item.label} value={item.value} />
+                    <Picker.Item key={item.label} label={item.label} value={item.value} />
                 ))}
             </Picker>
         </View>

@@ -1,27 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useContext } from 'react';
 import { View, Text, TextInput, FlatList,StyleSheet,TouchableOpacity } from 'react-native';
 import {OrderContext} from "../context/orderContext"
+import datalocal from "../data/Menu.json"
 
 const SearchRecommendation = ({ data }) => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [showsuggetions,setShowSuggetions]=useState(false);
   const { order, setOrder}=useContext(OrderContext)
+  const orginalData=order;
 //   console.log(data)
+  useEffect(()=>{setOrder(datalocal);console.log("Resetting data")},[])
 
   const handleInputChange = (text) => {
+    setShowSuggetions(true);
     setQuery(text);
     console.log(text);
-    const filteredSuggestions = data.filter(item =>
+    const filteredSuggestions = datalocal.filter(item =>
       item.title.toLowerCase().includes(text.toLowerCase())
     );
+    console.log("filter search result =>",filteredSuggestions);
     // const filteredSuggestions=""
-    if(query ==='')
-    {
-        setSuggestions([])
-        setShowSuggetions(false)
-    }
+    // if(query ==='')
+    // {
+    //     setSuggestions([])
+    //     setShowSuggetions(false)
+    // }
     setSuggestions(filteredSuggestions);
     setShowSuggetions(true)
   };
@@ -31,14 +36,16 @@ const SearchRecommendation = ({ data }) => {
     console.log("Choosed ",option);
     setQuery(option);
     setShowSuggetions(false)
-
-  }
-
-  const searchRes=order.filter((item)=>item.title===query)
-  if(searchRes!==undefined && searchRes!==null && searchRes!=="")
-  {
+    const searchRes=datalocal.filter((item)=>item.title.includes(option) && option!=="")
+    console.log("search result is =>",searchRes);
     setOrder(searchRes);
   }
+
+  
+  // if(searchRes!==undefined && searchRes!==null && searchRes!=="")
+  // {
+  //   setOrder(searchRes);
+  // }
 
   return (
     <View>

@@ -7,7 +7,7 @@ import IsVeg from './FoodTypeComp';
 
 const FoodItem = ({title,url,descr,price,rating,isVeg,onPress}) => {
   let imgurl=JSON.stringify(url);
-  console.log(url)
+  // console.log(url)
   const [showDelete,setShowDelete]=useState(false)
   const [showReceivedModal,setShowReceivedModal]=useState(false)
 
